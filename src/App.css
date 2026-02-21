@@ -9,27 +9,11 @@
   --border: #1a1a1a;
 }
 
+/* --- GRUNDLÄGGANDE --- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/* Lenis kräver dessa för att fungera optimalt */
-html.lenis {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
 }
 
 body {
@@ -39,101 +23,40 @@ body {
   overflow-x: hidden;
 }
 
+/* --- LENIS & BAKGRUND --- */
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+.particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -1;
+  pointer-events: none;
+  background: #050505;
+}
+
+.bg-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.05), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 .portfolio {
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 30px;
-}
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px; /* Flyttar ner den 40px från botten av skärmen */
-  left: 50%;
-  transform: translateX(-50%); /* Centrerar den exakt */
-  color: var(--text-dim);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-  z-index: 5;
-}
-
-.scroll-indicator:hover {
-  color: var(--accent);
-}
-
-/* --- SECTIONS --- */
-section,
-.footer.section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 120px 0;
-}
-
-.hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  padding: 0;
-}
-
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  margin-top: 20px;
-}
-
-.hero-socials {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  padding-left: 30px;
-  border-left: 1px solid var(--border);
-  /* Skapar en snygg avskiljare */
-  height: 30px;
-}
-
-.hero-socials a {
-  color: var(--text-dim);
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-}
-
-.hero-socials a:hover {
-  color: var(--accent);
-  transform: translateY(-3px);
-  /* Liten lyft-effekt vid hover */
-}
-
-/* För mobilen: Stapla dem om det blir för trångt */
-@media (max-width: 600px) {
-  .hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 30px;
-  }
-
-  .hero-socials {
-    padding-left: 0;
-    border-left: none;
-    height: auto;
-  }
-}
-
-.section-title {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  letter-spacing: 4px;
-  margin-bottom: 60px;
 }
 
 /* --- NAVBAR --- */
@@ -149,31 +72,46 @@ section,
   z-index: 10;
 }
 
-.logo {
-  font-weight: 800;
-  font-size: 1.2rem;
-}
-
-.dot {
-  color: var(--accent);
-}
-
+.logo { font-weight: 800; font-size: 1.2rem; }
+.dot { color: var(--accent); }
 .nav-links a {
   text-decoration: none;
   color: var(--text-dim);
   margin-left: 40px;
   transition: 0.3s;
+  font-size: 0.9rem;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* --- SEKTIONS-LAYOUT --- */
+section, .footer.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 0;
 }
 
-.nav-links a:hover {
-  color: var(--text);
+.section-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  letter-spacing: 4px;
+  margin-bottom: 60px;
 }
 
-/* --- TYPOGRAPHY & BUTTONS --- */
+/* --- HERO --- */
+.hero {
+  height: 100vh;
+  padding: 0;
+  position: relative;
+}
+
 .hero h1 {
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 800;
   letter-spacing: -3px;
+  line-height: 1.1;
 }
 
 .gradient-text {
@@ -182,11 +120,71 @@ section,
   -webkit-text-fill-color: transparent;
 }
 
+/* Status Badge (Den gröna texten) */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(34, 197, 94, 0.1); /* Ljusgrön transparens */
+  color: #22c55e; /* Stark grön */
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  margin-bottom: 24px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 10px #22c55e;
+  animation: pulse 2s infinite;
+}
+
+/* Gradients och textfärger */
+.gradient-text-alt {
+  background: linear-gradient(90deg, #00d2ff, #9d50bb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.highlight-text {
+  color: #00d2ff; /* Din primärfärg */
+  font-weight: 600;
+}
+
+.hero-p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 20px 0 30px 0;
+}
+
+/* Puls-animation för den gröna pricken */
+@keyframes pulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 .hero-p {
   font-size: 1.25rem;
   color: var(--text-dim);
   margin: 30px 0;
   max-width: 500px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 20px;
 }
 
 .btn-main {
@@ -197,9 +195,50 @@ section,
   text-decoration: none;
   font-weight: 600;
   display: inline-block;
+  transition: 0.3s;
 }
 
-/* --- ABOUT & CARDS --- */
+.btn-main:hover { transform: translateY(-2px); filter: brightness(0.9); }
+
+.hero-socials {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding-left: 30px;
+  border-left: 1px solid var(--border);
+  height: 30px;
+}
+
+.hero-socials a {
+  color: var(--text-dim);
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.hero-socials a:hover {
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 5;
+}
+
+.scroll-indicator:hover { color: var(--accent); }
+
+/* --- OM MIG --- */
 .about-wrapper {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -210,6 +249,12 @@ section,
   width: 100%;
   border-radius: 20px;
   border: 1px solid var(--border);
+}
+
+.about-bio {
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: var(--text-dim);
 }
 
 .tech-stack-display {
@@ -226,34 +271,45 @@ section,
   border: 1px solid var(--border);
 }
 
-.tech-icon {
-  color: var(--accent);
-  margin-bottom: 10px;
+.tech-icon { color: var(--accent); margin-bottom: 10px; }
+
+/* --- PROJEKT --- */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
 }
 
-/* --- PROJECTS --- */
 .project-row {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 60px;
-  margin-bottom: 100px;
   align-items: center;
 }
 
 .project-image {
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid var(--border);
+  flex: 1;
+  width: 100%;
+  max-width: 500px; /* Eller den bredd du redan har */
+  height: 300px;    /* Här sätter vi en fast höjd för ALLA bilder */
+  border-radius: 20px;
+  overflow: hidden; /* Döljer det som hamnar utanför */
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .project-image img {
   width: 100%;
-  transition: 0.5s;
+  height: 100%;
+  object-fit: cover;     /* Detta är "magin" – bilden fyller ut utan att deformeras */
+  object-position: top;  /* Fokuserar på toppen av screenshoten (oftast snyggast) */
+  transition: transform 0.5s ease;
 }
 
-.project-row:hover img {
-  transform: scale(1.03);
+.project-row:hover .project-image img {
+  transform: scale(1.05); /* En mjuk zoom-effekt vid hover */
 }
+
+.project-details h3 { font-size: 2.5rem; margin-bottom: 15px; }
 
 .project-tags {
   display: flex;
@@ -267,19 +323,65 @@ section,
   border: 1px solid var(--border);
   padding: 4px 12px;
   border-radius: 20px;
+  color: var(--text-dim);
+}
+
+.project-cta {
+  display: flex;
+  gap: 30px;
+  margin-top: 10px;
+}
+
+.link-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.link-icon:hover { color: var(--accent); }
+
+.highlight-text {
+  color: #22c55e; /* Den gröna färgen som vi använde tidigare */
+  font-weight: 600;
+  background: rgba(34, 197, 94, 0.05); /* En subtil grön bakgrundston bakom orden */
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.about-bio {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 25px;
 }
 
 /* --- FOOTER --- */
+.footer.section {
+  justify-content: flex-end;
+  padding-bottom: 0;
+}
+
+.footer-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .contact-card {
   background: var(--card);
   padding: 80px;
   border-radius: 40px;
   text-align: center;
   border: 1px solid var(--border);
+  margin-bottom: 60px;
 }
 
 .email-link {
-  font-size: 2rem;
+  font-size: clamp(1.2rem, 4vw, 2rem);
   color: var(--accent);
   text-decoration: none;
   display: flex;
@@ -289,24 +391,38 @@ section,
   margin-top: 20px;
 }
 
-/* --- MOBILE --- */
-@media (max-width: 900px) {
+.footer-bottom {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  width: 100%;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
 
-  .about-wrapper,
-  .project-row,
-  .tech-stack-display {
+/* --- MOBIL --- */
+@media (max-width: 900px) {
+  .about-wrapper, .project-row, .tech-stack-display {
     grid-template-columns: 1fr;
   }
 
-  .navbar {
-    padding: 20px 0;
+  .navbar { padding: 20px 0; }
+  .nav-links, .scroll-indicator { display: none; }
+  
+  .project-row { gap: 30px; }
+  .contact-card { padding: 40px 20px; }
+}
+
+@media (max-width: 600px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
   }
 
-  .nav-links {
-    display: none;
-  }
-  
-  .scroll-indicator {
-    display: none;
+  .hero-socials {
+    padding-left: 0;
+    border-left: none;
+    height: auto;
   }
 }

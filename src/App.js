@@ -8,7 +8,6 @@ import './App.css';
 const App = () => {
   const name = "Alexander Eriksson";
 
-  // --- SCROLL MOTOR (LENIS) ---
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -28,12 +27,28 @@ const App = () => {
 
   const projects = [
     {
-      title: "Modern E-Commerce Store",
-      description: "En högpresterande butik byggd i React med fokus på prestanda. Implementerade ett smart filtersystem och dynamisk bildhantering.",
-      tech: ["React", "Node.js", "Framer Motion", "REST API"],
-      link: "https://din-e-handel.vercel.app",
-      github: "https://github.com/din-github",
-      image: "/screenshots/E-commerceHomeScreen.png"
+      title: "Fullstack E-Commerce Solution",
+      description: "En modern webbutik med fokus på prestanda och användarupplevelse. Utvecklad med React och Vite, med en robust backend via Supabase för autentisering och databashantering. Innehåller full CRUD-funktionalitet, smart kundvagn och avancerad filtrering.",
+      tech: ["React", "Vite", "Supabase", "CRUD"],
+      link: "https://e-commerce-eight-ebon-76.vercel.app/",
+      github: "https://github.com/AlexanderEriksson92/E-commerce",
+      image: "/screenshots/E-commerceScreen.png"
+    },
+    {
+      title: "SkyCast Weather Hub",
+      description: "En högteknologisk väderapplikation med en unik 'Glassmorphism'-design. Använder OpenWeather API för realtidsdata och väderprognoser. Innehåller autocomplete-sökning, geolokalisering och dynamiska bakgrunder som skiftar beroende på aktuellt väderförhållande.",
+      tech: ["React", "Vite", "OpenWeather API", "Glassmorphism", "CSS"],
+      link: "#",
+      github: "https://github.com/AlexanderEriksson92/weatherapp",
+      image: "/screenshots/WeatherScreen.png"
+    },
+    {
+      title: "Retro Snake Classic",
+      description: "Ett klassiskt arkadspel utvecklat i C# som fokuserar på logik och objektorienterad programmering. Spelet har ett integrerat high-score system, paus-funktion och skalbara svårighetsgrader för en autentisk spelupplevelse i .NET-miljö.",
+      tech: ["C#", ".NET", "Visual Studio", "OOP"],
+      link: "#",
+      github: "https://github.com/AlexanderEriksson92/SnakeProject",
+      image: "/screenshots/snakeScreen.png"
     }
   ];
 
@@ -67,42 +82,55 @@ const App = () => {
           transition={{ duration: 1 }}
           className="hero-content"
         >
-          <motion.span className="hero-tag">Tillgänglig för uppdrag</motion.span>
+          {/* Grön badge för status */}
+          <motion.div className="status-badge">
+            <span className="status-dot"></span>
+            Tillgänglig för nya uppdrag
+          </motion.div>
+
           <motion.h1>
-            Hej, mitt namn är <br />
-            <span className="gradient-text">{name}</span>
+            Fullstack-utvecklare som gillar att bygga<br />
+            <span className="gradient-text-alt">moderna och responsiva lösningar</span>
           </motion.h1>
+
           <motion.p className="hero-p">
-            Fullstack-utvecklare som skapar digitala upplevelser med precision och passion.
+            Jag heter <span className="highlight-text">{name}</span> och fokuserar på att skapa webbsidor och applikationer som är snabba, tydliga och lätta att använda.
           </motion.p>
+
           <motion.div className="hero-actions">
             <a href="#projects" className="btn-main">Se mina projekt</a>
             <div className="hero-socials">
-              <a href="#"><Github /></a>
-              <a href="#"><Linkedin /></a>
+              <a href="https://github.com/AlexanderEriksson92"><Github size={24} /></a>
+              <a href="https://www.linkedin.com/in/alexander-eriksson92/"><Linkedin size={24} /></a>
             </div>
           </motion.div>
         </motion.div>
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="scroll-indicator">
-          <ChevronDown />
+
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="scroll-indicator"
+          onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
+        >
+          <ChevronDown size={32} />
         </motion.div>
       </section>
 
       <section id="about" className="section">
         <motion.h2 className="section-title" {...fadeInUp}>Om mig</motion.h2>
         <div className="about-wrapper">
-          <motion.div 
+          <motion.div
             className="about-profile-img"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <img src="/profile-pic.jpg" alt={name} />
+            <img src="/about-profile-img.jpg" alt={name} />
             <div className="img-border-decoration"></div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="about-content"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -110,10 +138,15 @@ const App = () => {
             transition={{ duration: 0.8 }}
           >
             <p className="about-bio">
-              Jag är en mångsidig fullstack-utvecklare med en bred teknisk verktygslåda från <strong>.NET</strong> till <strong>React</strong>.
+              Jag är en utvecklare som gillar att bygga egna projekt och förstå hur allt hänger ihop. Jag har jobbat en del med <span className="highlight-text">C#</span> och <span className="highlight-text">.NET</span> på backend-sidan och tycker det är kul att koppla det till snygga och tydliga gränssnitt.
             </p>
+
             <p className="about-bio">
-              Expertis inom <strong>WordPress</strong> och <strong>SEO</strong> för att skapa synliga resultat.
+              Medan min vardag oftast kretsar kring <span className="highlight-text">React</span>, är jag även bekväm med ramverk som <span className="highlight-text">Angular</span> och <span className="highlight-text">Vue</span>. Det gör att jag snabbt kan sätta mig in i olika miljöer och välja rätt verktyg för varje unikt projekt.
+            </p>
+
+            <p className="about-bio">
+              Förutom ren kodning har erfarenhet inom <span className="highlight-text">WordPress</span> och <span className="highlight-text">SEO</span>. Här ligger mitt fokus på prestanda och struktur – jag bygger webbplatser som inte bara ser bra ut, utan som också laddar snabbt och rankar högt på Google.
             </p>
             <div className="tech-stack-display">
               <div className="tech-card">
@@ -162,14 +195,16 @@ const App = () => {
       </section>
 
       <footer id="contact" className="footer section">
-        <motion.div className="contact-card" {...fadeInUp}>
-          <h2>Låt oss skapa något nytt</h2>
-          <a href="mailto:alexander@mail.com" className="email-link">
-            <Mail /> alexander@mail.com
-          </a>
-        </motion.div>
-        <div className="footer-bottom">
-          <p>© 2026 {name} — Byggd med React & Passion</p>
+        <div className="footer-content">
+          <motion.div className="contact-card" {...fadeInUp}>
+            <h2>Låt oss skapa något nytt</h2>
+            <a href="mailto:alexander@mail.com" className="email-link">
+              <Mail /> AlexanderE1992@hotmail.com
+            </a>
+          </motion.div>
+          <div className="footer-bottom">
+            <p>© 2026 {name} — Byggd med React</p>
+          </div>
         </div>
       </footer>
     </div>
