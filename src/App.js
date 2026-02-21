@@ -36,7 +36,7 @@ const App = () => {
     },
     {
       title: "SkyCast Weather Hub",
-      description: "En högteknologisk väderapplikation med en unik 'Glassmorphism'-design. Använder OpenWeather API för realtidsdata och väderprognoser. Innehåller autocomplete-sökning, geolokalisering och dynamiska bakgrunder som skiftar beroende på aktuellt väderförhållande.",
+      description: "En väderapplikation med en 'Glassmorphism'-design. Använder OpenWeather API för realtidsdata och väderprognoser. Innehåller autocomplete-sökning, geolokalisering och dynamiska bakgrunder som skiftar beroende på aktuellt väderförhållande.",
       tech: ["React", "Vite", "OpenWeather API", "Glassmorphism", "CSS"],
       link: "#",
       github: "https://github.com/AlexanderEriksson92/weatherapp",
@@ -48,7 +48,7 @@ const App = () => {
       tech: ["C#", ".NET", "Visual Studio", "OOP"],
       link: "#",
       github: "https://github.com/AlexanderEriksson92/SnakeProject",
-      image: "/screenshots/snakeScreen.png"
+      image: "/screenshots/SnakeScreen.png"
     }
   ];
 
