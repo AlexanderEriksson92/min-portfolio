@@ -38,7 +38,7 @@ const App = () => {
       title: "SkyCast Weather Hub",
       description: "En väderapplikation med en 'Glassmorphism'-design. Använder OpenWeather API för realtidsdata och väderprognoser. Innehåller autocomplete-sökning, geolokalisering och dynamiska bakgrunder som skiftar beroende på aktuellt väderförhållande.",
       tech: ["React", "Vite", "OpenWeather API", "Glassmorphism", "CSS"],
-      link: "#",
+      link: "https://weatherapp-theta-livid.vercel.app/",
       github: "https://github.com/AlexanderEriksson92/weatherapp",
       image: "/screenshots/WeatherScreen.png"
     },
