@@ -4,6 +4,7 @@ import { Github, ExternalLink, Mail, Linkedin, ChevronDown, Code2, Cpu, Globe } 
 import Lenis from '@studio-freight/lenis';
 import Particles from './Particles';
 import './App.css';
+import { Analytics } from '@vercel/analytics/react';
 
 const App = () => {
   const name = "Alexander Eriksson";
@@ -207,6 +208,7 @@ const App = () => {
           </div>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 };
