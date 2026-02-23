@@ -29,7 +29,7 @@ const App = () => {
     requestAnimationFrame(raf);
     return () => lenis.destroy();
   }, []);
- 
+
   const projects = [
     {
       title: "Fullstack E-Commerce Solution",
@@ -70,22 +70,20 @@ const App = () => {
       <div className="bg-glow"></div>
 
       <nav className="navbar">
-        <div className="navbar-container">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="logo">
-            {name.toUpperCase()}<span className="dot">.</span>
-          </motion.div>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="logo">
+          {name.toUpperCase()}<span className="dot">.</span>
+        </motion.div>
 
-          <div className={`menu-icon ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+        <div className={`menu-icon ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
 
-          <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <a href="#about" onClick={() => setIsMenuOpen(false)}>Om</a>
-            <a href="#projects" onClick={() => setIsMenuOpen(false)}>Projekt</a>
-            <a href="#contact" onClick={() => setIsMenuOpen(false)}>Kontakt</a>
-          </div>
+        <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          <a href="#about" onClick={() => setIsMenuOpen(false)}>Om</a>
+          <a href="#projects" onClick={() => setIsMenuOpen(false)}>Projekt</a>
+          <a href="#contact" onClick={() => setIsMenuOpen(false)}>Kontakt</a>
         </div>
       </nav>
 
@@ -141,7 +139,6 @@ const App = () => {
             transition={{ duration: 0.8 }}
           >
             <img src="/about-profile-img.jpg" alt={name} />
-            <div className="img-border-decoration"></div>
           </motion.div>
 
           <motion.div

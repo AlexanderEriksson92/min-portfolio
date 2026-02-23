@@ -75,14 +75,22 @@ html.lenis {
 /* --- NAVBAR & PERFEKT KRYSS --- */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Denna tvingar loggan till vänster och nav-links till höger */
   align-items: center;
-  padding: 40px 0;
+  padding: 40px 30px; /* 30px padding på sidorna så de inte nuddar skärmkanten */
   position: absolute;
   top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  max-width: 1200px;
+  max-width: 1200px; /* Håller innehållet centrerat på stora skärmar */
   z-index: 2000;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Extra säkerhet för att trycka länkarna till höger */
 }
 
 .logo {
@@ -126,11 +134,6 @@ html.lenis {
 
 .menu-icon.active span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
 }
 
 .nav-links a {
