@@ -5,9 +5,13 @@ import Lenis from '@studio-freight/lenis';
 import Particles from './Particles';
 import './App.css';
 import { Analytics } from '@vercel/analytics/react';
+import { useState } from 'react';
+
 
 const App = () => {
   const name = "Alexander Eriksson";
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -25,7 +29,7 @@ const App = () => {
     requestAnimationFrame(raf);
     return () => lenis.destroy();
   }, []);
-
+ 
   const projects = [
     {
       title: "Fullstack E-Commerce Solution",
@@ -66,13 +70,22 @@ const App = () => {
       <div className="bg-glow"></div>
 
       <nav className="navbar">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="logo">
-          {name.toUpperCase()}<span className="dot">.</span>
-        </motion.div>
-        <div className="nav-links">
-          <a href="#about">Om</a>
-          <a href="#projects">Projekt</a>
-          <a href="#contact">Kontakt</a>
+        <div className="navbar-container">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="logo">
+            {name.toUpperCase()}<span className="dot">.</span>
+          </motion.div>
+
+          <div className={`menu-icon ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+            <a href="#about" onClick={() => setIsMenuOpen(false)}>Om</a>
+            <a href="#projects" onClick={() => setIsMenuOpen(false)}>Projekt</a>
+            <a href="#contact" onClick={() => setIsMenuOpen(false)}>Kontakt</a>
+          </div>
         </div>
       </nav>
 

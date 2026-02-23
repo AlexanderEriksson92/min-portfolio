@@ -7,6 +7,7 @@
   --text: #ffffff;
   --text-dim: #888;
   --border: #1a1a1a;
+  --blue-accent: #00d2ff;
 }
 
 /* --- GRUNDLÄGGANDE --- */
@@ -16,6 +17,7 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: var(--bg);
@@ -24,10 +26,21 @@ body {
 }
 
 /* --- LENIS & BAKGRUND --- */
-html.lenis { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
 
 .particles-canvas {
   position: fixed;
@@ -59,7 +72,7 @@ html.lenis { height: auto; }
   padding: 0 30px;
 }
 
-/* --- NAVBAR --- */
+/* --- NAVBAR & PERFEKT KRYSS --- */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -69,11 +82,57 @@ html.lenis { height: auto; }
   top: 0;
   width: 100%;
   max-width: 1200px;
-  z-index: 10;
+  z-index: 2000;
 }
 
-.logo { font-weight: 800; font-size: 1.2rem; }
-.dot { color: var(--accent); }
+.logo {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.dot {
+  color: var(--accent);
+}
+
+.menu-icon {
+  display: none; /* Dold på desktop */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 35px;
+  height: 20px;
+  cursor: pointer;
+  padding: 2px;
+  z-index: 5000;
+}
+
+.menu-icon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff !important;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+/* FIX: Symmetriskt kryss */
+.menu-icon.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-icon.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.menu-icon.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
 .nav-links a {
   text-decoration: none;
   color: var(--text-dim);
@@ -81,15 +140,19 @@ html.lenis { height: auto; }
   transition: 0.3s;
   font-size: 0.9rem;
 }
-.nav-links a:hover { color: var(--text); }
 
-/* --- SEKTIONS-LAYOUT --- */
+.nav-links a:hover {
+  color: var(--text);
+}
+
+/* --- SEKTIONS-LAYOUT (200px avstånd) --- */
 section, .footer.section {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 120px 0;
+  padding: 150px 0; 
+  margin-bottom: 40px; /* FIX: Ändrat till 200px avstånd mellan sektioner */
+  position: relative;
 }
 
 .section-title {
@@ -102,8 +165,8 @@ section, .footer.section {
 
 /* --- HERO --- */
 .hero {
-  height: 100vh;
-  padding: 0;
+  min-height: 90vh;
+  padding: 120px 0 0 0;
   position: relative;
 }
 
@@ -114,19 +177,12 @@ section, .footer.section {
   line-height: 1.1;
 }
 
-.gradient-text {
-  background: linear-gradient(to right, #fff, #888);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Status Badge (Den gröna texten) */
 .status-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(34, 197, 94, 0.1); /* Ljusgrön transparens */
-  color: #22c55e; /* Stark grön */
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -145,7 +201,12 @@ section, .footer.section {
   animation: pulse 2s infinite;
 }
 
-/* Gradients och textfärger */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 .gradient-text-alt {
   background: linear-gradient(90deg, #00d2ff, #9d50bb);
   -webkit-background-clip: text;
@@ -154,8 +215,11 @@ section, .footer.section {
 }
 
 .highlight-text {
-  color: #00d2ff; /* Din primärfärg */
+  color: var(--blue-accent);
   font-weight: 600;
+  background: rgba(0, 210, 255, 0.05);
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 .hero-p {
@@ -164,20 +228,6 @@ section, .footer.section {
   max-width: 600px;
   color: rgba(255, 255, 255, 0.8);
   margin: 20px 0 30px 0;
-}
-
-/* Puls-animation för den gröna pricken */
-@keyframes pulse {
-  0% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-.hero-p {
-  font-size: 1.25rem;
-  color: var(--text-dim);
-  margin: 30px 0;
-  max-width: 500px;
 }
 
 .hero-actions {
@@ -198,7 +248,10 @@ section, .footer.section {
   transition: 0.3s;
 }
 
-.btn-main:hover { transform: translateY(-2px); filter: brightness(0.9); }
+.btn-main:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.9);
+}
 
 .hero-socials {
   display: flex;
@@ -223,7 +276,7 @@ section, .footer.section {
 
 .scroll-indicator {
   position: absolute;
-  bottom: 40px;
+  bottom: -100px; 
   left: 50%;
   transform: translateX(-50%);
   color: var(--text-dim);
@@ -233,10 +286,8 @@ section, .footer.section {
   gap: 10px;
   cursor: pointer;
   transition: 0.3s;
-  z-index: 5;
+  z-index: 10; 
 }
-
-.scroll-indicator:hover { color: var(--accent); }
 
 /* --- OM MIG --- */
 .about-wrapper {
@@ -245,16 +296,27 @@ section, .footer.section {
   gap: 80px;
 }
 
+.about-profile-img {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  z-index: 5;
+}
+
 .about-profile-img img {
   width: 100%;
+  height: auto;
+  display: block;
   border-radius: 20px;
-  border: 1px solid var(--border);
 }
+
+/* FIX: img-border-decoration BORTTAGEN HÄRIFRÅN */
 
 .about-bio {
   margin-bottom: 20px;
   line-height: 1.6;
-  color: var(--text-dim);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
 }
 
 .tech-stack-display {
@@ -271,7 +333,10 @@ section, .footer.section {
   border: 1px solid var(--border);
 }
 
-.tech-icon { color: var(--accent); margin-bottom: 10px; }
+.tech-icon {
+  color: var(--accent);
+  margin-bottom: 10px;
+}
 
 /* --- PROJEKT --- */
 .projects-container {
@@ -288,33 +353,42 @@ section, .footer.section {
 }
 
 .project-image {
-  flex: 1;
   width: 100%;
-  max-width: 500px; /* Eller den bredd du redan har */
-  height: 300px;    /* Här sätter vi en fast höjd för ALLA bilder */
+  height: 300px;
   border-radius: 20px;
-  overflow: hidden; /* Döljer det som hamnar utanför */
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .project-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;     /* Detta är "magin" – bilden fyller ut utan att deformeras */
-  object-position: top;  /* Fokuserar på toppen av screenshoten (oftast snyggast) */
+  object-fit: cover;
   transition: transform 0.5s ease;
 }
 
 .project-row:hover .project-image img {
-  transform: scale(1.05); /* En mjuk zoom-effekt vid hover */
+  transform: scale(1.05);
 }
 
-.project-details h3 { font-size: 2.5rem; margin-bottom: 15px; }
+.project-details h3 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.project-number {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 10px;
+}
 
 .project-tags {
   display: flex;
   gap: 10px;
-  margin: 20px 0;
+  margin: 30px 0;
   flex-wrap: wrap;
 }
 
@@ -342,38 +416,19 @@ section, .footer.section {
   transition: 0.3s;
 }
 
-.link-icon:hover { color: var(--accent); }
-
-.highlight-text {
-  color: #22c55e; /* Den gröna färgen som vi använde tidigare */
-  font-weight: 600;
-  background: rgba(34, 197, 94, 0.05); /* En subtil grön bakgrundston bakom orden */
-  padding: 2px 4px;
-  border-radius: 4px;
+.link-icon:hover {
+  color: var(--accent);
 }
 
-.about-bio {
-  font-size: 1.1rem;
-  line-height: 1.75;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 25px;
-}
-
-/* --- FOOTER --- */
+/* --- FOOTER & CONTACT CARD --- */
 .footer.section {
   justify-content: flex-end;
   padding-bottom: 0;
 }
 
-.footer-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .contact-card {
   background: var(--card);
-  padding: 80px;
+  padding: 120px 60px;
   border-radius: 40px;
   text-align: center;
   border: 1px solid var(--border);
@@ -401,28 +456,45 @@ section, .footer.section {
 }
 
 /* --- MOBIL --- */
-@media (max-width: 900px) {
-  .about-wrapper, .project-row, .tech-stack-display {
-    grid-template-columns: 1fr;
+@media (max-width: 1100px) {
+  .menu-icon {
+    display: flex; /* Aktiveras här */
+    position: absolute;
+    top: 40px;
+    right: 60px;
   }
 
-  .navbar { padding: 20px 0; }
-  .nav-links, .scroll-indicator { display: none; }
-  
-  .project-row { gap: 30px; }
-  .contact-card { padding: 40px 20px; }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 3000;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links a {
+    margin: 15px 0;
+    font-size: 2.5rem;
+    margin-left: 0;
+  }
 }
 
-@media (max-width: 600px) {
-  .hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 30px;
+@media (max-width: 900px) {
+  .about-wrapper,
+  .project-row,
+  .tech-stack-display {
+    grid-template-columns: 1fr;
   }
-
-  .hero-socials {
-    padding-left: 0;
-    border-left: none;
-    height: auto;
-  }
+  .project-row { gap: 30px; }
+  .contact-card { padding: 80px 20px; }
 }
